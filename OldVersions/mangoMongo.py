@@ -69,4 +69,4 @@ def findRestaurantsBy(key, value):
         print restaurants
         return restaurants
 
-#findRestaurantsBy("grades.score", 11)
+findRestaurantsBy("grades.score", 11)
