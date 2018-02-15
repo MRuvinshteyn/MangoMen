@@ -31,3 +31,36 @@ def findRestaurantsByZipcode(zipcode):
         return restaurants
 
 #findRestaurantsByZipcode("11377")
+
+def findRestaurantsByZipcodeAndGrade(zipcode, grade):
+    restaurants = collection.find({"address.zipcode":zipcode, "grades.grade":grade})
+    if (print_results):
+        for i in restaurants:
+            print i
+    else:
+        print restaurants
+        return restaurants
+
+#findRestaurantsByZipcodeAndGrade("11377", "A")
+
+def findRestaurantsByZipcodeWithMaxScore(zipcode, score):
+    restaurants = collection.find({"address.zipcode":zipcode, "grades.score": {"$lt": score}})
+    if (print_results):
+        for i in restaurants:
+            print i
+    else:
+        print restaurants
+        return restaurants
+
+#findRestaurantsByZipcodeWithMaxScore("11377", 15)
+
+def findRestaurantsBy(key, value):
+    restaurants = collection.find({key:value})
+    if (print_results):
+        for i in restaurants:
+            print i
+    else:
+        print restaurants
+        return restaurants
+
+#findRestaurantsBy("grades.score", 11)
