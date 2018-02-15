@@ -16,8 +16,11 @@ def findRestaurantsByBorough(borough):
         for i in restaurants:
             print i
     else:
-        #print restaurants
-        return restaurants
+        ret = []
+        for i in restaurants:
+            ret.append(i)
+        print ret
+        return ret
 
 #findRestaurantsByBorough("Queens")
 
@@ -27,8 +30,11 @@ def findRestaurantsByZipcode(zipcode):
         for i in restaurants:
             print i
     else:
-        print restaurants
-        return restaurants
+        ret = []
+        for i in restaurants:
+            ret.append(i)
+        print ret
+        return ret
 
 #findRestaurantsByZipcode("11377")
 
