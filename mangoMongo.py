@@ -16,8 +16,11 @@ def findRestaurantsByBorough(borough):
         for i in restaurants:
             print i
     else:
-        #print restaurants
-        return restaurants
+        ret = []
+        for i in restaurants:
+            ret.append(i)
+        print ret
+        return ret
 
 #findRestaurantsByBorough("Queens")
 
@@ -27,7 +30,29 @@ def findRestaurantsByZipcode(zipcode):
         for i in restaurants:
             print i
     else:
-        print restaurants
-        return restaurants
+        ret = []
+        for i in restaurants:
+            ret.append(i)
+        print ret
+        return ret
 
 #findRestaurantsByZipcode("11377")
+
+def findRestaurantsByZipcodeAndGrade(zipcode,grade):
+    restaurants = collection.find({"address.zipcode":zipcode})
+    ret = []
+    for i in restaurants:
+        if len(i['grades']) > 0:
+            for c in i['grades']:
+                print c['grade'] == grade
+                if (c['grade'] == grade):
+                    ret.append(i)
+                    break
+    if (print_results):
+        for i in ret:
+            print i
+    else:
+        print ret
+        return ret
+            
+#findRestaurantsByZipcodeAndGrade("11377","B")
