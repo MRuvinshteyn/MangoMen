@@ -1,6 +1,8 @@
 '''
 Pokemon GO Dataset: https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json
 Includes basic pokemon information such as pokedex number, name, and type as well as Pokemon GO specific information such as candy name and evolution line.
+
+This script checks if the collection already exists before inserting data and doesn't do so if the data is already loaded into the database. 
 '''
 
 import json
