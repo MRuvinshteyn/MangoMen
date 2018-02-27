@@ -1,9 +1,6 @@
-'''
-Pokemon GO Dataset: https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json
-Includes basic pokemon information such as pokedex number, name, and type as well as Pokemon GO specific information such as candy name and evolution line.
+from flask import Flask, render_template, request
 
-This script checks if the collection already exists before inserting data and doesn't do so if the data is already loaded into the database. 
-'''
+app = Flask(__name__)
 
 import json
 from pymongo import MongoClient
@@ -42,3 +39,28 @@ def find_pokemon_by_type(pokemon_type):
     for p in db.pokemon.find({'type' : pokemon_type}):
         ret.append(p)
     return ret
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/search', methods=['GET'])
+def query():
+    search_query = request.args.get('query').strip()
+    full_list = []
+    if search_query.isdigit():
+        full_list += find_pokemon_by_id(int(search_query))
+    full_list += find_pokemon_by_name(search_query)
+    full_list += find_pokemon_by_type(search_query)
+    ret = ''
+    for pokemon in full_list:
+        entry = {}
+        entry['id'] = pokemon['id']
+        entry['name'] = pokemon['name'].encode('ascii', 'ignore')
+        entry['type'] = pokemon['type'][0].encode('ascii', 'ignore')
+        entry['img'] = pokemon['img'].encode('ascii', 'ignore')
+        ret += 'Pokemon #%d: %s with type %s,' % (entry['id'], entry['name'], entry['type'])
+    return ret[:-1]
+
+if __name__ == '__main__':
+    app.run(debug=True)

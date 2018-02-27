@@ -1,0 +1,9 @@
+div {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+input[type=text] {
+  font-family: Arial;
+  font-size: 26px;
+}
